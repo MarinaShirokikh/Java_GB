@@ -28,11 +28,11 @@ public class lesson_1 {
         // п.3.
         System.out.println(calc(2, 3, 5, 2));
         // п. 4 сумма двух чисел
-        System.out.println(metod4(5, 6));
+        System.out.println(range(5, 6));
         // п. 5
-        metod5(0);
+        negativOrPozitiv(0);
         // п. 6
-        metod6(-5);
+        negativOrPozitivTF(-5);
         // п. 7
         namePrint("Вася");
         year(1900);
@@ -43,21 +43,21 @@ public class lesson_1 {
         return a * (b + (c / d));
     }
 
-    public static boolean metod4(int a, int b){
+    public static boolean range(int a, int b){
         a = a+b;
         if ((a >= 10)&&(a<=20)) {
             return true;
         }else return false;
     }
 
-    public static void metod5(int a){
+    public static void negativOrPozitiv(int a){
         if (a<0){
             System.out.println("Значение отрицательное: " + a);
         }
         else System.out.println("Значение положительное: " + a);
     }
 
-    public static boolean metod6(int a){
+    public static boolean negativOrPozitivTF(int a){
         if (a<0){
             System.out.println("Значение отрицательное: " + a);
             return true;
