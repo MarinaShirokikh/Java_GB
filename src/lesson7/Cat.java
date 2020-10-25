@@ -6,11 +6,11 @@ public class Cat {
     private String name;
     private int portion = 0;
     private boolean food = false; //сытость (при создании голодные, если покушал - true);
-    private final Random random = new Random ();
+    private final Random random = new Random (); //для порции еды
 
     Cat(String name){
         this.name = name;
-        this.portion = random.nextInt(10) + 1;
+        this.portion = random.nextInt(10) + 1; //какая то порция еды для создаваемого кота
         this.food = false;
 
     }

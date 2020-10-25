@@ -10,20 +10,36 @@ package lesson7;
 import java.util.Scanner;
 
 public class Main {
-    static int BOWL = 10;
-    static int MAX_BOWL = 30;
+    /* Логика реализации
+    * Создан массив котов и миска с 10 единицами еды. Запускаю кормление, кому-то еды не хватит из-за индивидуальной порции кота, кому-то хватило.
+    * Проверяю сытость котов. если есть голодный, то справшиваю "добавить еды или нет?". Если да - в миску добавляется еды до максимального (полная миска).
+    * Изапускается еще раз метод кормеления котов.
+    * Если из 3 котов, при первом проходе не хватило 2му, но 3й поел, то после второго прогана 2й тоже должен быть сытым. возврат в проверку и все сытые.
+    * Если из 3 котов, при первом проходе не хватило 2му и 3му еды; _И_ Если после добавления еды и второго прогона кормления хватило 2му, а 3ему нет, то при возврате в проверку,
+    * снова будет предложено добавить еды в миску и запуск третьего прогона кормления.
+    * Если пользователь соглашается добавлять еду в миску, то все коты будут сыты при нескольких проходах кормления.
+    */
+
+    static int BOWL = 10; // устанавливаю кол-во еды в миске
+    static int MAX_BOWL = 30; //максимальный объем миски (допустимое кол-во при добавлении еды)
     public static void main(String[] args) {
+        //создаю массив котов от класса Cat
         Cat [] arrCat = new Cat[3];
         arrCat[0] = new Cat("Vasy");
         arrCat[1] = new Cat("Musy");
         arrCat[2] = new Cat("Barsik");
         System.out.println("___Есть котики___");
-        PrintArr(arrCat);
+        PrintArr(arrCat); //вывод списка котов
         System.out.println("___Пора их покормить___");
-        feedTheCat(arrCat);
+        feedTheCat(arrCat); //кормление всех котов
         System.out.println("___Итог кормления___");
-     //   PrintArr(arrCat);
+        CheckFood(arrCat); //проверка сытости + добавить в миску еды и запустить кормление еще
 
+
+    }
+
+    //метод проверки сытости котов и вызов на повторный допуск котов к миске
+    private static void CheckFood(Cat[] arrCat) {
         for (int i = 0; i < arrCat.length; i++) {
             if(arrCat[i].getFood() == false){
                 System.out.println("Котику " + arrCat[i].getName() + " не хватило еды в миске.");
@@ -40,10 +56,9 @@ public class Main {
             }
 
         }
-
-
     }
-//метод кормления котов
+
+    //метод кормления котов
     private static void feedTheCat(Cat[] arrCat){
         System.out.println("Для всех котов в миске есть еды: " + BOWL);
         for (int i = 0; i < arrCat.length; i++) {
@@ -62,6 +77,7 @@ public class Main {
 
         }
 
+        // метод вывода информации о всех котах (использовалось для отладки)
         private static void PrintArr(Cat [] arrCat){
             for (int i = 0; i < arrCat.length; i++) {
                 arrCat[i].PrintInfoCat();
@@ -69,19 +85,16 @@ public class Main {
             }
         }
 
+        // метод добавления еды в миску до максимального объема (еда "досыпается до максимума")
         private static void AddBowl(){
            BOWL = MAX_BOWL;
-            System.out.println("В миску добавлена еда. Количество: " + BOWL);
+           System.out.println("В миску добавлена еда. Количество: " + BOWL);
            }
 
-           //перед вызовом вывести вопрос и варианты ответов true/false
+        //метод "вопрос пользователю - да/нет" перед вызовом вывести вопрос и варианты ответов true/false
         private static boolean YesNo(){
         Scanner scanner = new Scanner(System.in);
             boolean bn = scanner.nextBoolean();
-            if (bn == true){
-                return true;
-                }else {
-                return false;
-            }
+            return bn;
         }
 }
