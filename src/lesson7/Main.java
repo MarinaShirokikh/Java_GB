@@ -22,13 +22,30 @@ public class Main {
         System.out.println("___Пора их покормить___");
         feedTheCat(arrCat);
         System.out.println("___Итог кормления___");
-        PrintArr(arrCat);
+     //   PrintArr(arrCat);
+
+        for (int i = 0; i < arrCat.length; i++) {
+            if(arrCat[i].getFood() == false){
+                System.out.println("Котику " + arrCat[i].getName() + " не хватило еды в миске.");
+                System.out.println("Добавить еды в миску? (true / false)");
+                if (YesNo() == true){
+                    AddBowl();
+                    feedTheCat(arrCat);
+                }else {
+                    System.out.println("Жадина. Котики будут голодные.");
+                }
+
+            }else {
+                System.out.println("Котик " + arrCat[i].getName() + " сытый и может играть!");
+            }
+
+        }
 
 
     }
-
+//метод кормления котов
     private static void feedTheCat(Cat[] arrCat){
-        System.out.println("В миске для котов есть еды: " + BOWL);
+        System.out.println("Для всех котов в миске есть еды: " + BOWL);
         for (int i = 0; i < arrCat.length; i++) {
             if (arrCat[i].getFood() != false) {
                 System.out.println("Котик " + arrCat[i].getName() + " сытый");
@@ -52,16 +69,19 @@ public class Main {
             }
         }
 
-        private static int AddBowl(){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Добавить еды в миску? (true / false)");
+        private static void AddBowl(){
+           BOWL = MAX_BOWL;
+            System.out.println("В миску добавлена еда. Количество: " + BOWL);
+           }
+
+           //перед вызовом вывести вопрос и варианты ответов true/false
+        private static boolean YesNo(){
+        Scanner scanner = new Scanner(System.in);
             boolean bn = scanner.nextBoolean();
             if (bn == true){
-                return BOWL = MAX_BOWL;
+                return true;
                 }else {
-                System.out.println("Жадина");
-                return BOWL;
+                return false;
             }
-
         }
 }
